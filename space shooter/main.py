@@ -47,12 +47,18 @@ while running:
         display_surface.blit(star_surf, star_pos)
 
     # player
-    if player_rect.right > WINDOW_WIDTH or player_rect.left < 0:
-        player_direction.x = -player_direction.x
-        print(player_direction)
-    elif player_rect.bottom > WINDOW_HEIGHT or player_rect.top < 0:
-        player_direction.y = -1
-        print(player_direction)
+    if player_rect.right > WINDOW_WIDTH:
+        player_rect.right = WINDOW_WIDTH
+        player_direction.x *= -1
+    elif player_rect.left < 0:
+        player_rect.left = 0
+        player_direction.x *= -1
+    elif player_rect.bottom > WINDOW_HEIGHT:
+        player_rect.bottom = WINDOW_HEIGHT
+        player_direction.y *= -1
+    elif player_rect.top < 0:
+        player_rect.top = 0
+        player_direction.y *= -1
 
     player_rect.center += player_direction * player_speed * dt
 
